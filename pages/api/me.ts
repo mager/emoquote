@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function me(req: NextApiRequest, res: NextApiResponse) {
-  const response = await fetch("http://localhost:8080/me", {
+  const response = await fetch("https://quotient-pqpe2diiwq-uc.a.run.app/me", {
     headers: {
       "Content-Type": "application/json",
     },
