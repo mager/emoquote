@@ -67,9 +67,10 @@ export default function Header() {
       <nav>
         <ul className={styles.navItems}>
           <li className={styles.navItem}>
-            <Link href="/">Home</Link>
+            <Link href="/history">History</Link>
           </li>
         </ul>
+        <h1>Emoquote</h1>
       </nav>
     </header>
   );

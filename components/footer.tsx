@@ -5,7 +5,7 @@ import packageJSON from "../package.json";
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div>Emoquote</div>
+      <div>Built with 🌭 by @mager</div>
     </footer>
   );
 }
