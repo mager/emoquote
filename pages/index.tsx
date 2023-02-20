@@ -1,13 +1,32 @@
-import Layout from "../components/layout"
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import Layout from "../components/layout";
 
-export default function IndexPage() {
+export default function Index() {
+  const { data } = useSession();
+  const [user, setUser] = useState(null);
+
+  // Call an API endpoint to get user data
+  useEffect(() => {
+    if (data) {
+      const req = { email: data?.user?.email };
+      fetch("/api/me", { method: "POST", body: JSON.stringify(req) })
+        .then((res) => res.json())
+        .then((data) => {
+          setUser(data);
+        });
+    }
+  }, [data]);
+
   return (
     <Layout>
-      <h1>NextAuth.js Example</h1>
-      <p>
-        This is an example site to demonstrate how to use{" "}
-        <a href="https://next-auth.js.org">NextAuth.js</a> for authentication.
-      </p>
+      {user ? (
+        <div>
+          <h1>Me</h1>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </Layout>
-  )
+  );
 }
