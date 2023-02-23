@@ -1,77 +1,62 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import styles from "./header.module.css";
-
-// The approach used in this component shows how to build a sign in and sign out
-// component that works on pages which support both client and server side
-// rendering, and avoids any flash incorrect content on initial page load.
+import Container from "./container";
+import Logo from "./logo";
 export default function Header() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
   return (
-    <header>
-      <noscript>
-        <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-      </noscript>
-      <div className={styles.signedInStatus}>
-        <p
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
-          {!session && (
-            <>
-              <span className={styles.notSignedInText}>
-                You are not signed in
-              </span>
-              <a
-                href={`/api/auth/signin`}
-                className={styles.buttonPrimary}
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn();
-                }}
-              >
-                Sign in
-              </a>
-            </>
-          )}
-          {session?.user && (
-            <>
-              {session.user.image && (
-                <span
-                  style={{ backgroundImage: `url('${session.user.image}')` }}
-                  className={styles.avatar}
-                />
-              )}
-              <span className={styles.signedInText}>
-                <small>Signed in as</small>
-                <br />
-                <strong>{session.user.email ?? session.user.name}</strong>
-              </span>
-              <a
-                href={`/api/auth/signout`}
-                className={styles.button}
-                onClick={(e) => {
-                  e.preventDefault();
-                  signOut();
-                }}
-              >
-                Sign out
-              </a>
-            </>
-          )}
-        </p>
-      </div>
-      <nav>
-        <ul className={styles.navItems}>
-          <li className={styles.navItem}>
-            <Link href="/history">History</Link>
-          </li>
-        </ul>
-        <h1>Emoquote</h1>
-      </nav>
+    <header className="my-4">
+      <Container>
+        <div className="min-h-2 w-full">
+          <p>
+            {!session && (
+              <>
+                <span>You are not signed in</span>
+                <a
+                  href={`/api/auth/signin`}
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn();
+                  }}
+                >
+                  Sign in
+                </a>
+              </>
+            )}
+            {session?.user && (
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col justify-start items-start">
+                  <span>Signed in as</span>
+                  <strong>{session.user.name}</strong>
+                </div>
+                <a
+                  href={`/api/auth/signout`}
+                  className="btn btn-secondary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  Sign out
+                </a>
+              </div>
+            )}
+          </p>
+        </div>
+        <div>
+          <Logo />
+        </div>
+        {/* <nav>
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link href="/history">History</Link>
+            </li>
+          </ul>
+        </nav> */}
+      </Container>
     </header>
   );
 }

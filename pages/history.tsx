@@ -30,7 +30,6 @@ export default function History() {
     <Layout>
       {history ? (
         <div>
-          <h1>History</h1>
           <ul>
             {history.map((item) => (
               <li key={item.id}>

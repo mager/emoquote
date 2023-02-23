@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Layout from "../components/layout";
 import type { User } from "../types/user";
 import { Session } from "next-auth";
+import Quote from "../components/quote";
 
 export default function Index() {
   const { data } = useSession();
@@ -19,7 +20,10 @@ export default function Index() {
     <Layout>
       {user ? (
         <div>
-          <h1>Welcome {user.name}!</h1>
+          <h1>Hey {user.name}!</h1>
+          <Quote>
+            Love is not only something you feel, it is something you do.
+          </Quote>
         </div>
       ) : (
         <p>Sign in to get started!</p>
