@@ -21,7 +21,6 @@ export default function History() {
               attr: "This is an author",
             },
           ]);
-          // setHistory(data);
         });
     }
   }, [data]);

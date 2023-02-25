@@ -38,7 +38,7 @@ const Emotions = ({ selectedEmotions, onEmotionSelect }: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-4 my-4">
+    <div className="grid grid-cols-4 m-2">
       {Object.entries(emojiMap).map(([emoji, topic]) => (
         <Emotion
           key={emoji}

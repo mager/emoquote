@@ -46,14 +46,13 @@ export default function Index() {
   };
 
   const step1 = !loading && !quote;
-
   return (
     <Layout>
       {user ? (
         <div>
           {step1 && (
             <>
-              <h1>Generate a quote</h1>
+              <h1>Choose an emotion:</h1>
               <Emotions
                 selectedEmotions={selectedEmotions}
                 onEmotionSelect={onEmotionSelect}
@@ -76,7 +75,9 @@ export default function Index() {
           )}
         </div>
       ) : (
-        <p>Sign in to get started!</p>
+        <div className="py-4">
+          <p>Sign in to get started!</p>
+        </div>
       )}
     </Layout>
   );
