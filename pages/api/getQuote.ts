@@ -2,8 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { post } from "../../utils/api";
 
 const getQuote = async (req: NextApiRequest, res: NextApiResponse) => {
+  const bodyJSON = JSON.parse(req.body);
   const body = JSON.stringify({
-    emotion: JSON.parse(req.body).join(""),
+    topic: bodyJSON.selectedEmotions.join(" and "),
+    id: bodyJSON.user.id,
   });
 
   try {

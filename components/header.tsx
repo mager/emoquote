@@ -7,9 +7,9 @@ export default function Header() {
   const loading = status === "loading";
 
   return (
-    <header className="my-4">
+    <header className="mt-4">
       <Container>
-        <div className="min-h-2 w-full">
+        <div className="min-h-2 w-full mb-4">
           <p>
             {!session && (
               <>

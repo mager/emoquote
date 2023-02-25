@@ -31,7 +31,7 @@ export default function Index() {
     setLoading(true);
     fetch("/api/getQuote", {
       method: "POST",
-      body: JSON.stringify(selectedEmotions),
+      body: JSON.stringify({ selectedEmotions, user }),
     })
       .then((res) => res.json())
       .then((data) => {

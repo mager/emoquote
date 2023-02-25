@@ -18,80 +18,36 @@ const Emotions = ({ selectedEmotions, onEmotionSelect }: Props) => {
     }
   };
 
+  const emojiMap = {
+    "💪🏼🚀": "Motivation",
+    "💡👏🏼": "Inspiration",
+    "🤣👻": "Funny",
+    "🙏🏼💖": "Gratitude",
+    "🤔🤯": "Curiosity",
+    "🤝💛": "Friendship",
+    "💕💘": "Love",
+    "🏆👑": "Leadership",
+    "🎵🎧": "Music",
+    "🎊🏅": "Success",
+    "💪🦁": "Courage",
+    "✝️🕊️": "Faith",
+    "🌟🕊️": "Hope",
+    "🌱🌍": "Life",
+    "🌈🌞": "Joy",
+    "🏃🎯": "Perseverance",
+  };
+
   return (
     <div className="grid grid-cols-4 my-4">
-      <Emotion
-        selected={selectedEmotions.includes("❤️")}
-        onClick={() => handleEmotionClick("❤️")}
-      >
-        ❤️
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("😊")}
-        onClick={() => handleEmotionClick("😊")}
-      >
-        😊
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("😦")}
-        onClick={() => handleEmotionClick("😦")}
-      >
-        😦
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🙏")}
-        onClick={() => handleEmotionClick("🙏")}
-      >
-        🙏
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("😅")}
-        onClick={() => handleEmotionClick("😅")}
-      >
-        😅
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("😭")}
-        onClick={() => handleEmotionClick("😭")}
-      >
-        😭
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🤯")}
-        onClick={() => handleEmotionClick("🤯")}
-      >
-        🤯
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("👩‍❤️‍👨")}
-        onClick={() => handleEmotionClick("👩‍❤️‍👨")}
-      >
-        👩‍❤️‍👨
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🌞")}
-        onClick={() => handleEmotionClick("🌞")}
-      >
-        🌞
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🍕")}
-        onClick={() => handleEmotionClick("🍕")}
-      >
-        🍕
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🪄")}
-        onClick={() => handleEmotionClick("🪄")}
-      >
-        🪄
-      </Emotion>
-      <Emotion
-        selected={selectedEmotions.includes("🥴")}
-        onClick={() => handleEmotionClick("🥴")}
-      >
-        🥴
-      </Emotion>
+      {Object.entries(emojiMap).map(([emoji, topic]) => (
+        <Emotion
+          key={emoji}
+          selected={selectedEmotions.includes(topic)}
+          onClick={() => handleEmotionClick(topic)}
+        >
+          {emoji}
+        </Emotion>
+      ))}
     </div>
   );
 };
