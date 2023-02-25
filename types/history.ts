@@ -1,5 +1,5 @@
-export type History = {
+export type HistoryT = {
   id: string;
   quote: string;
-  author: string;
+  attr: string;
 };

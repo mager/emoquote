@@ -1,13 +1,19 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Layout from "../components/layout";
-import type { User } from "../types/user";
+import type { UserT } from "../types/user";
+import type { QuoteT } from "../types/quote";
 import { Session } from "next-auth";
+import Emotions from "../components/emotions";
 import Quote from "../components/quote";
+import Loading from "../components/loading";
 
 export default function Index() {
   const { data } = useSession();
-  const [user, setUser] = useState(null as User | null);
+  const [user, setUser] = useState(null as UserT | null);
+  const [selectedEmotions, setSelectedEmotions] = useState([] as string[]);
+  const [quote, setQuote] = useState(null as QuoteT | null);
+  const [loading, setLoading] = useState(false);
 
   // Call an API endpoint to get user data
   useEffect(() => {
@@ -16,14 +22,58 @@ export default function Index() {
     }
   }, [data]);
 
+  const onEmotionSelect = (selectedEmotions: string[]) => {
+    setSelectedEmotions(selectedEmotions);
+  };
+
+  // getQuote is a POST request with a body of selectedEmotions
+  const getQuote = () => {
+    setLoading(true);
+    fetch("/api/getQuote", {
+      method: "POST",
+      body: JSON.stringify(selectedEmotions),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setQuote(data.quote);
+        setLoading(false);
+      });
+  };
+
+  const reset = () => {
+    setQuote(null);
+    setSelectedEmotions([]);
+  };
+
+  const step1 = !loading && !quote;
+
   return (
     <Layout>
       {user ? (
         <div>
-          <h1>Hey {user.name}!</h1>
-          <Quote>
-            Love is not only something you feel, it is something you do.
-          </Quote>
+          {step1 && (
+            <>
+              <h1>Generate a quote</h1>
+              <Emotions
+                selectedEmotions={selectedEmotions}
+                onEmotionSelect={onEmotionSelect}
+              />
+              <div className="my-8">
+                <button className="btn btn-primary btn-lg" onClick={getQuote}>
+                  Generate
+                </button>
+              </div>
+            </>
+          )}
+          {loading && <Loading />}
+          {quote && <Quote text={quote.text} attr={quote.attr}></Quote>}
+          {quote && (
+            <div className="my-8">
+              <button className="btn btn-primary btn-lg" onClick={reset}>
+                Generate another
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <p>Sign in to get started!</p>
@@ -34,7 +84,7 @@ export default function Index() {
 
 const fetchMe = (
   data: Session,
-  setUser: Dispatch<SetStateAction<User | null>>
+  setUser: Dispatch<SetStateAction<UserT | null>>
 ) => {
   const req = { email: data?.user?.email, name: data?.user?.name };
   fetch("/api/me", { method: "POST", body: JSON.stringify(req) })

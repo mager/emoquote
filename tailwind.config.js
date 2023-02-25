@@ -19,16 +19,17 @@ module.exports = {
         themes: [
             {
                 mytheme: {
-                    "primary": "#570DF8",
-                    "secondary": "#F000B8",
-                    "accent": "#37CDBE",
-                    "neutral": "#3D4451",
-                    "base-100": "#FFFFFF",
-                    "info": "#3ABFF8",
-                    "success": "#36D399",
-                    "warning": "#FBBD23",
-                    "error": "#F87272",
-                },
+                    "primary": "#FFCE00",  // default emoji yellow
+                    "secondary": "#FF6B6B",  // bright red
+                    "accent": "#67D5B5",  // mint green
+                    "neutral": "#F3F3F3",  // light gray
+                    "base-100": "#FFFFFF",  // white
+                    "info": "#6FA8DC",  // sky blue
+                    "success": "#8ED081",  // light green
+                    "warning": "#FFC65B",  // yellow-orange
+                    "error": "#F15B5B",  // dark red
+                }
+                ,
             },
         ],
     },

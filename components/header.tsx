@@ -40,7 +40,7 @@ export default function Header() {
                     signOut();
                   }}
                 >
-                  Sign out
+                  <span className="material-symbols-outlined">logout</span>
                 </a>
               </div>
             )}
