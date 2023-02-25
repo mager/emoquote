@@ -9,31 +9,26 @@ export default function History() {
 
   // Call an API endpoint to get user data
   useEffect(() => {
-    if (data) {
-      const req = { email: data?.user?.email, name: data?.user?.name };
+    if (data && data.user) {
+      const req = { email: data.user.email };
       fetch("/api/history", { method: "POST", body: JSON.stringify(req) })
         .then((res) => res.json())
         .then((data) => {
-          setHistory([
-            {
-              id: "abc",
-              quote: "This is a quote",
-              attr: "This is an author",
-            },
-          ]);
+          setHistory(data.quotes);
         });
     }
   }, [data]);
 
   return (
     <Layout>
+      <div className="alert alert-warning">WIP DESIGN</div>
       {history ? (
         <div>
           <ul>
             {history.map((item) => (
               <li key={item.id}>
-                <p>{item.quote}</p>
-                <p>{item.attr}</p>
+                <span className="text-lg">{item.text}</span>
+                <span className="text-sm">{item.attr}</span>
               </li>
             ))}
           </ul>

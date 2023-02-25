@@ -4,8 +4,7 @@ import Container from "./container";
 import Logo from "./logo";
 
 export default function Header() {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
+  const { data: session } = useSession();
 
   return (
     <header className="mt-4">
@@ -13,7 +12,7 @@ export default function Header() {
         <div className="min-h-2 w-full mb-4">
           {!session && (
             <div className="flex justify-between items-center">
-              <span>-</span>
+              <span />
               <Link
                 href="/api/auth/signin"
                 className="btn btn-primary"
@@ -54,13 +53,6 @@ export default function Header() {
         <div>
           <Logo />
         </div>
-        {/* <nav>
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link href="/history">History</Link>
-            </li>
-          </ul>
-        </nav> */}
       </Container>
     </header>
   );
