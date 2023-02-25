@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Layout from "../components/layout";
-import type { History } from "../types/history";
+import type { HistoryT } from "../types/history";
 
 export default function History() {
   const { data } = useSession();
-  const [history, setHistory] = useState([] as History[]);
+  const [history, setHistory] = useState([] as HistoryT[]);
 
   // Call an API endpoint to get user data
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function History() {
             {
               id: "abc",
               quote: "This is a quote",
-              author: "This is an author",
+              attr: "This is an author",
             },
           ]);
           // setHistory(data);
@@ -34,7 +34,7 @@ export default function History() {
             {history.map((item) => (
               <li key={item.id}>
                 <p>{item.quote}</p>
-                <p>{item.author}</p>
+                <p>{item.attr}</p>
               </li>
             ))}
           </ul>
